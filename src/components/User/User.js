@@ -1,11 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import Result from '../Result/Result';
+import Loader from '../Loader/Loader';
 
 import { config } from '../../config';
 
 class User extends Component {
   state = {
     users: [],
+    loading: false,
+    error: null,
   };
 
   userRef = React.createRef();
@@ -17,22 +20,30 @@ class User extends Component {
     if (inputValue === '') {
       this.setState({ users: [] });
     } else {
-      fetch(
-        `https://api.github.com/users/${inputValue}?client_id=${
-          config.client_id
-        }&client_secret=${config.client_secret}`,
-      )
-        .then((res) => res.json())
-        .then((user) => this.setState({ users: user }))
-        .catch((error) => {
-          console.log(error);
-        });
+      this.setState({ loading: true }, () => {
+        fetch(
+          `https://api.github.com/users/${inputValue}?client_id=${
+            config.client_id
+          }&client_secret=${config.client_secret}`,
+        )
+          .then((res) => res.json())
+          .then((user) => this.setState({ users: user, loading: false }))
+          .catch((error) => {
+            console.log({
+              error: error.statusText,
+              message: error.message,
+              status: error.status,
+            });
+          });
+      });
     }
 
     e.target.reset();
   };
 
   render() {
+    const { users, loading, error } = this.state;
+
     return (
       <Fragment>
         <form onSubmit={this.getUser}>
@@ -54,7 +65,7 @@ class User extends Component {
           </button>
         </form>
         <div className="container">
-          <Result user={this.state.users} />
+          {loading ? <Loader /> : <Result user={users} />}
         </div>
       </Fragment>
     );
