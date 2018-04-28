@@ -19,31 +19,31 @@ input {
   margin: 2em 0 1em 0;
 }
 
-img{
-  height:300px;
-  width:300px;
+img {
+  height: 300px;
+  width: 300px;
   border-radius: 7px;
-  border: 3px solid #FF3860;
+  border: 3px solid #ff3860;
 }
 
 h1,
 h2,
 h3,
 li,
-p{
-  color:white;
+p {
+  color: white;
   padding: 0.35em;
 }
 
-a{
-  color:#FF3860;
-  text-decoration:none;
+a {
+  color: #ff3860;
+  text-decoration: none;
 }
 
-a:hover{
-  color:white;
+a:hover {
+  color: white;
 }
 
-
-
-
+.fa-spinner {
+  color: white;
+}
