@@ -32,23 +32,25 @@ class Result extends Component {
 
     return (
       <div className="container">
-        <h1>Username: {login}</h1>
-        <h2>Location: {location}</h2>
+        {login && <h1>Username: {login}</h1>}
+        {location && <h2>Location: {location}</h2>}
         {this.checkForImage()}
-        <h2>{bio}</h2>
-        <ul>
-          <li>Followers: {followers}</li>
-          <li>Following: {following}</li>
-          <li>Repos: {public_repos}</li>
-          <li>
-            Github Profile:{' '}
-            <a href={html_url} target="_blank">
-              {' '}
-              Here
-            </a>
-          </li>
-          <li>Joined: {created_at}</li>
-        </ul>
+        {bio && <h2>{bio}</h2>}
+        {followers & following & public_repos & created_at && (
+          <ul>
+            <li>Followers: {followers}</li>
+            <li>Following: {following}</li>
+            <li>Repos: {public_repos}</li>
+            <li>
+              Github Profile:{' '}
+              <a href={html_url} target="_blank">
+                {' '}
+                Here
+              </a>
+            </li>
+            <li>Joined: {created_at}</li>
+          </ul>
+        )}
       </div>
     );
   }

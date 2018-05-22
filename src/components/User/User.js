@@ -28,11 +28,11 @@ class User extends Component {
         )
           .then((res) => res.json())
           .then((user) => this.setState({ users: user, loading: false }))
-          .catch((error) => {
+          .catch((err) => {
             console.log({
-              error: error.statusText,
-              message: error.message,
-              status: error.status,
+              error: err.statusText,
+              message: err.message,
+              status: err.status,
             });
           });
       });
